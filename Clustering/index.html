@@ -185,8 +185,9 @@ img src=""
               default map view will be whole of UK at zoom level 7 -->
               <button id="tablinks4" onclick="geolocation();">Find my location</button>
               <!-- Placeholder here for another map feature TBD -->
+              <!-- commenting out unfinished feature
               <button class="HelpButton" data-step="2" data-intro="Ok, wasn't that fun?" data-position='right' data-scrollTo='tooltip' id="tablinks3"  onclick="getHelp();">Addional Features</button>
-
+			-->
 
 
 
@@ -195,10 +196,11 @@ img src=""
               <!--Next in this sidebar pane we present the five nearest neighbours
               to the selected map feature. These will be presented as a <ul> with hyperlinks
               that will select another point and centre the map-->
+              <!-- commenting out unfinished feature
               </br></br>
               <div class="tabKNN" id="tabKNN">
                 <p id="sidebar-text2"></p>
-              </div>
+              </div>-->
             </div>
           </div> <!--end div classs="sidebar-content"-->
         </div><!--end div classs="sidebar"-->
@@ -321,7 +323,7 @@ img src=""
 
             </br></br></br></br>
             <!-- Buttons here to turn on/off presentation of different data tables
-            Note: style for commEnergy,commLand,DTAS,ECS,cityFarms,sccan,permaculture
+            Note: style for commEnergy,commLand,Churches,ECS,cityFarms,sccan,permaculture
             buttons in bootstrap.css
 
             button colours:
@@ -345,7 +347,7 @@ img src=""
             <div class="tab2" id="tab2">
               <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                  <button type="button" style="background:#6a3d9a" class="btn btn-secondary .btn-block" id="DTAS" onclick="AddElements(DTAS,'DTAS');">DTAS</button>
+                  <button type="button" style="background:#6a3d9a" class="btn btn-secondary .btn-block" id="Churches" onclick="AddElements(Churches,'Churches');">Churches</button>
 
                   <button type="button" style="background:#33a02c"  class="btn btn-secondary" id="ECS" onclick="AddElements(ECS,'ECS');">ECS</button>
 
@@ -487,7 +489,7 @@ var brown = '#b15928';
 
 //This makes an SQL which sets the zoom level but all data sets are shown as they are called below
 function setInitialData(){
-  DTAS()
+  Churches()
 }
 
 
@@ -525,25 +527,25 @@ function setInitialData(){
 
 //This functionality removes the elements that are clicked on in the top of the side bar. This code needs to be in the body tag or it will throw a error
 //This code works by overwriting the leaflet library functionality firstly setting the leafletView.Cluster._markers = [] as empty. It then makes calls to the different groups sql calls
-//as seen with the group names e.g. DTAS these functions are below
+//as seen with the group names e.g. Churches these functions are below
     var commLandCount;
-    var DTAScount = 0;
+    var Churchescount = 0;
 
   function All(){
      commLand();
-      DTAS();
+      Churches();
       ECS();
   }
 
 
 
   function AddElements(group,name){
-//cityFarms,SCCAN,commEnergy,All,commLand,ECS,DTAS
+//cityFarms,SCCAN,commEnergy,All,commLand,ECS,Churches
     //resets all the elements to blue - need to change to clours when selected
 
 
     // console.log('name is ' + name);
-    document.getElementById('DTAS').style.opacity='1.0';
+    document.getElementById('Churches').style.opacity='1.0';
 
     document.getElementById('ECS').style.opacity='1.0';
     document.getElementById('commLand').style.opacity='1.0';
@@ -1048,10 +1050,10 @@ commLand();
 
 
 
-    //3rd call - dtas
+    //3rd call - Churches
 
-    function DTAS(){
-  var query3 = $.getJSON('https://carto.mapping.community:9090/user/hilld/api/v2/sql?format=GeoJSON&q=SELECT * FROM "mapcomm-admin".dtas_groups_gb_sct',
+    function Churches(){
+  var query3 = $.getJSON('https://carto.mapping.community:9090/user/hilld/api/v2/sql?format=GeoJSON&q=SELECT * FROM "mapcomm-admin".all_churches',
     function(data1) {
 
         L.geoJSON(data1, {
@@ -1077,7 +1079,7 @@ commLand();
 
     });
   }
-  DTAS();
+  Churches();
 
 
  //4th - ecs
